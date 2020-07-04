@@ -10,6 +10,7 @@ Include Libs and Startup
 #Include libs\DownloadFile.ahk
 #Include libs\ListBoxAdjustHSB.ahk
 #Include libs\7Zip.ahk
+#Include libs\Update.ahk
 
 CurrentRelease := 1.0
 if(!FileExist("settings.ini")) {
@@ -17,6 +18,10 @@ if(!FileExist("settings.ini")) {
 }
 IniRead, Ip, settings.ini, Settings, ip
 IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
+
+if(FileExist("update.exe")) {
+    FileDelete, update.exe
+}
 
 /*
 Functions
@@ -65,10 +70,13 @@ CheckForUpdates(CurrentRelease, AutoUpdate = false) {
         LastReleaseURL := JsonResponse.assets[1].browser_download_url
         DownloadFile(LastReleaseURL, "release.zip", True, False)
         Extract_7Zip("7za.exe")
-        RunWait %comspec% /c %A_WorkingDir%\7za.exe x -aos "release.zip" -o"%A_WorkingDir%",,hide
-        FileDelete, release.zip
-        FileDelete, 7za.exe
-        Reload
+        While !FileExist( "7za.exe")
+            Sleep 250
+        Extract_Update("update.exe")
+        While !FileExist( "update.exe")
+            Sleep 250
+        Run, update.exe
+        ExitApp
     IfMsgBox, No
         EnableGui()
         return
