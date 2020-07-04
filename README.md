@@ -18,8 +18,9 @@ Over on your 3DS, you should now see a prompt in FBI asking you if you want to i
 ## Credits:
 * manuGMG,
 * Steveice10 ([servefiles.py](https://github.com/Steveice10/FBI/tree/master/servefiles)),
-* TimmSkiller (fixes), 
+* TimmSkiller (fixes & German Translation), 
 * DexterX12 (fixes),
+* CiN CiN (Italian Translation),
 * Mineplanet84 (testing),
 * MyPasswordIsWeak (testing),
 * Mike (testing),
