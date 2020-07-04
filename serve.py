@@ -23,10 +23,8 @@ except ImportError:
 
 accepted_extension = ('.cia', '.tik', '.cetk', '.3dsx')
 hostPort = 8080 # Default value
-
-with open('ip.txt', 'r') as f:
-    target_ip = f.read()
 target_path = sys.argv[1]
+target_ip = sys.argv[2]
 hostIp = [(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]
 hostPort = 8080 # Default
 
