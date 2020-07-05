@@ -16,15 +16,23 @@ beeShop should now start downloading the selected list entry's `.cia` file. Once
 Over on your 3DS, you should now see a prompt in FBI asking you if you want to install. Press `Yes`, and FBI will get the file and install it automatically.
 
 ## Credits:
-* manuGMG,
-* Steveice10 ([servefiles.py](https://github.com/Steveice10/FBI/tree/master/servefiles)),
-* TimmSkiller (fixes & German Translation), 
-* DexterX12 (fixes),
-* CiN CiN (Italian Translation),
-* Mineplanet84 (testing),
-* MyPasswordIsWeak (testing),
-* Mike (testing),
-* Kaiju (testing).
+* manuGMG
+* Steveice10 ([servefiles.py](https://github.com/Steveice10/FBI/tree/master/servefiles))
+* DexterX12 & TimmSkiller
+
+**Translators:**
+* TimmSkiller (German Translation)
+* CiN CiN (Italian Translation)
+* raccoon (French Translation)
+* Eidwood (Catalan Translation)
+* GrabsZel (Portuguese Translation)
+
+**Testers:**
+* Mineplanet84
+* MyPasswordIsWeak
+* Mike
+* Kaiju
+* Kelonio
 
 ## Note:
 beeShop does not encourage piracy and is only a way of gathering homebrew applications to a modded Nintendo 3DS System.
