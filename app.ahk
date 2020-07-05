@@ -24,6 +24,10 @@ if(FileExist("update.exe")) {
     FileDelete, update.exe
 }
 
+/*
+Translations
+*/
+
 if (LanguageIni = 1) {
     txtDbMissing := "DB.CSV FILE IS MISSING.|beeShop needs a db to get links from.|(assets/db.csv)"
     txtButt1  := "Bump"
@@ -120,6 +124,78 @@ if (LanguageIni = 4) {
     txtSelectGame:= "Seleziona il gioco"
 }
 
+if (LanguageIni = 5) {
+    txtDbMissing := "O ARQUIVO DB.CSV NÃO FOI ENCONTRADO.|beeShop precisa de um banco de dados para conseguir links.|(assets/db.csv)"
+    txtButt1  := "Baixar e subir"
+    txtButt2  := "Configurações"
+    txtButt3  := "Upload"
+    txtStatus := "Status:"
+    txtDb := "BD: Local"
+    txtSpeed := "Velocidade:"
+    txtSettings := "Configurações"
+    txtLanguage := "Idioma:"
+    txtSave := "Salvar"
+    txtCfu := "Procurar por atualizações"
+    txtUpdate := "Atualizar"
+    txtAutoUpdate := "Procurar por atualizações automaticamente"
+    txtCfuMsg := "Checar se existem atualizações?"
+    txtUpdateFound := "Uma atualização foi encontrada. Gostaria de instalar agora?"
+    txtNoUpdateFound := "Nenhuma atualização foi encontrada. `n(Última versão: " . CurrentRelease . ")"
+    txtNoGame := "Nenhum jogo foi selecionado."
+    txtDownloading := "Baixando"
+    txtUploading := "Fazendo upload"
+    txtIpNotConfigured := "IP não está configurado."
+    txtSelectGame := "Selecione o jogo"
+}
+
+if (LanguageIni = 6) {
+    txtDbMissing := "No s'ha trobat l'arxiu DB.CSV. |beeShop necessita una base de dades per funcionar.|(assets/db.csv)"
+    txtButt1  := "Descarregar i pujar"
+    txtButt2  := "Configuració"
+    txtButt3  := "Pujar"
+    txtStatus := "Estat:"
+    txtDb := "BD: Local"
+    txtSpeed := "Velocitat:"
+    txtSettings := "Configuració"
+    txtLanguage := "Idioma:"
+    txtSave := "Guardar"
+    txtCfu := "Buscar actualizacions"
+    txtUpdate := "Actualizar"
+    txtAutoUpdate := "Buscar actualizacions automàticament"
+    txtCfuMsg := "¿Vols buscar actualizacions?"
+    txtUpdateFound := "S'ha trobat una versio més recent de beeShop. ¿Vols actualizar ara?"
+    txtNoUpdateFound := "No s'han trobat actualizacions. `n(Última versio: " . CurrentRelease . ")"
+    txtNoGame := "No s'ha seleccionat cap joc."
+    txtDownloading := "Descarregant"
+    txtUploading := "Pujant"
+    txtIpNotConfigured := "No s'ha trobat una direcció IP configurada"
+    txtSelectGame := "Selecciona un joc" 
+}
+
+if (LanguageIni = 7) {
+    txtDbMissing := "LE FICHIER DB.CSV N'A PAS ÉTÉ TROUVÉ.|beeShop a besoin d'une base de données pour récupérer les liens.|(assets/db.csv)"
+    txtButt1  := "Télécharger"
+    txtButt2  := "Paramètres"
+    txtButt3  := "Soumettre"
+    txtStatus := "Statut:"
+    txtDb := "BD: Locale"
+    txtSpeed := "Vitesse:"
+    txtSettings := "Paramètres"
+    txtLanguage := "Langue:"
+    txtSave := "Sauvegarder"
+    txtCfu := "Rechercher des mises à jour"
+    txtUpdate := "Mettre à jour"
+    txtAutoUpdate := "Rechercher des mises à jour automatiquement"
+    txtCfuMsg := "Voudriez-vous rechercher des mises à jour?"
+    txtUpdateFound := "Une mise à jour a été trouvée. Voudriez-vous l'installer?"
+    txtNoUpdateFound := "Aucune mise à jour trouvé. `n(Dernière version: " . CurrentRelease . ")"
+    txtNoGame := "Aucun jeu n'a été selectionné."
+    txtDownloading := "En cours de téléchargement"
+    txtUploading := "En cours de soumission"
+    txtIpNotConfigured := "IP non configuré"
+    txtSelectGame := "Selectionnez le jeu"
+}
+
 /*
 Functions
 */
@@ -169,21 +245,33 @@ if (LanguageIni = 1) {
     Gui, Add, Text, x385 y61 w200 cFFFFFF vSpeedGui2, -
     Gui, Add, Text, x343 y29 w200 cFFFFFF vStatus, %txtStatus% Idle
     Gui, Add, Text, x343 y45 cFFFFFF vDatabase, %txtDb%
-} 
+} else if (LanguageIni = 5) {
+    Gui, Add, Text, x343 y61 cFFFFFF vSpeedGui, %txtSpeed%
+    Gui, Add, Text, x402 y61 w200 cFFFFFF vSpeedGui2, -
+    Gui, Add, Text, x343 y29 w200 cFFFFFF vStatus, %txtStatus% Idle
+    Gui, Add, Text, x343 y45 cFFFFFF vDatabase, %txtDb%
+} else if (LanguageIni = 6) {
+    Gui, Add, Text, x343 y61 cFFFFFF vSpeedGui, %txtSpeed%
+    Gui, Add, Text, x390 y61 w200 cFFFFFF vSpeedGui2, -
+    Gui, Add, Text, x343 y29 w200 cFFFFFF vStatus, %txtStatus% Idle
+    Gui, Add, Text, x343 y45 cFFFFFF vDatabase, %txtDb%
+} else if (LanguageIni = 7) {
+    Gui, Add, Text, x343 y61 cFFFFFF vSpeedGui, %txtSpeed%
+    Gui, Add, Text, x385 y61 w200 cFFFFFF vSpeedGui2, -
+    Gui, Add, Text, x343 y29 w200 cFFFFFF vStatus, %txtStatus% Idle
+    Gui, Add, Text, x343 y45 cFFFFFF vDatabase, %txtDb%
+}
 Gui, Add, ListBox, x20 y120 w293 h250 vGameList hwndGameList +HScroll
 ListBoxAdjustHSB("GameList")
 Gui, Add, Button, x323 y120 w107 h30 vButt1 gBump, %txtButt1%
 Gui, Add, Button, x323 y160 w107 h30 vButt2 gSettings, %txtButt2%
 Gui, Add, Button, x323 y200 w107 h30 vButt3 gUpload, %txtButt3%
-Gui, Add, Pic, x323 y240 , assets\find.png
-Gui, Add, Edit, x323 y240 w107 h25 vSearch,
+Gui, Add, Edit, x340 y240 w90 h25 vSearch,
+Gui, Add, Pic, x323 y244, assets\find.png
 ; Gui, Add, Button, x223 y240 w107 h30 vButt4, Settings
 Gui, Add, Progress,x323 y327 w107 h30 vProgress cffda30, 0
 Gui, Color, 333e40
 Gui, Show, w450 h370, BeeShop
-if (AutoUpdateIni = 1) {
-    Goto, CheckForUpdates
-}
 
 if (FileExist("assets/db.csv")) {
     FileRead, games, assets\db.csv
@@ -202,6 +290,11 @@ Loop, % games.MaxIndex()
     GuiControl,, GameList, % game[1]
 }
 GuiControl,, Img, assets\bee2.tif
+
+if (AutoUpdateIni = 1) {
+    Goto, CheckForUpdates
+}
+
 return
 
 Upload:
@@ -281,7 +374,7 @@ IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
 IniRead, LanguageIni, settings.ini, Settings, language
 Gui, Add, Edit, vInputIp w220, %Ip%
 Gui, Add, Text,cFFFFFF, %txtLanguage%
-Gui, Add, DropDownList, w220 vLanguage Choose%LanguageIni% AltSubmit, English|Spanish|German|Italian
+Gui, Add, DropDownList, w220 vLanguage Choose%LanguageIni% AltSubmit, English|Spanish|German|Italian|Portuguese|Catalan|French
 Gui, Add, CheckBox, vAutoUpdate cFFFFFF Checked%AutoUpdateIni%, %txtAutoUpdate%
 Gui, Add, Button, w220 gSave, %txtSave%
 Gui, Add, Button, w220 gCheckForUpdates, %txtCfu%
@@ -290,10 +383,10 @@ Gui, Show,,%txtSettings%
 return
 
 CheckForUpdates:
-    if (AutoUpdate = true) {
+    if (AutoUpdateIni = 1) {
         MsgBox, 4, beeShop - %txtUpdate%, %txtCfuMsg%
         IfMsgBox, No
-            return
+        return
     }
     url := "https://api.github.com/repos/manuGMG/beeShop/releases/latest"
     whr := ComObjCreate("WinHttp.WinHttpRequest.5.1")
