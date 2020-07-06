@@ -14,7 +14,7 @@ Include Libs and Startup
 
 CurrentRelease := 1.2
 if(!FileExist("settings.ini")) {
-    FileAppend, [Settings]`nip=`nauto_update=0`nlanguage=1, settings.ini
+    FileAppend, [Settings]`nip=`nauto_update=0`nlanguage=1`ndb=, settings.ini
 }
 IniRead, Ip, settings.ini, Settings, ip
 IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
