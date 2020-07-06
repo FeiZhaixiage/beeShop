@@ -199,7 +199,7 @@ if FileExist(GameName) {
        GuiControl, Text, Status,  %txtStatus% %txtUploading%
        RunWait, serve.exe "%GameName%" "%Ip%",,hide
        GuiControl,, Progress,  0
-       GuiControl, Text, Status,  %txtStatus% Idle
+       GuiControl, Text, Status,  %txtStatus% %txtIdle%
        EnableGui()
        GameName := ""
     } else {
