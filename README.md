@@ -9,7 +9,7 @@ NOTE: Make sure your 3DS and the computer you're using beeShop on are on the sam
 2. Download `db.csv` (either made by yourself or from any other source) and put it inside the `assets` folder.
 3. On your 3DS, open FBI > Remote Install > "Receive URL's over the Network" and note down the IP of your 3DS (do not close FBI after doing this).
 4. Open beeShop.exe, and click on "Settings", which should open a small window that asks you to enter the IP address you noted from step 2. Enter the IP and press OK.
-5. Select a game from the list of the available ones, and click "Bump".
+5. Select a game from the list of the available ones, and click "Download".
 
 beeShop should now start downloading the selected list entry's `.cia` file. Once this is done, click the "Upload" button and beeShop should now ask you to specify the .`cia` file that was downloaded. After you've selected the file, beeShop will start serving the game file to FBI.
 
