@@ -316,6 +316,9 @@ if (InputIp == "") {
 }
     IniWrite, %AutoUpdate%, settings.ini, Settings, auto_update
     IniWrite, %Language%, settings.ini, Settings, language
+    if (!FileExist(DatabaseIni)) {
+        IniWrite, %ChosenDb%, settings.ini, Settings, db
+    }
     IniWrite, %ChosenDb%, settings.ini, Settings, db
 
     IniRead, SavedDb, settings.ini, Settings, db
