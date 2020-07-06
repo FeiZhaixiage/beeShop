@@ -74,6 +74,6 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True, E
 
         ;Update the ProgressBar
         GuiControl,, Progress,  %PercentDone%
-		GuiControl,, SpeedGui2, %SpeedText%
+		GuiControl,, SpeedGui,Speed: %SpeedText%
     Return
 }

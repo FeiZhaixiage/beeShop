@@ -113,22 +113,20 @@ GUI
 
 Menu, tray, Icon , assets/icon.ico, 1, 1
 Gui, 1:New,,beeShop
-Gui, Add, Pic, x10 y10 vImg, assets\bee.tif
-Gui, Add, Text, x303 y61 cFFFFFF vSpeedGui, %txtSpeed%
-Gui, Add, Text, x388 y61 w230 cFFFFFF vSpeedGui2, -
+Gui, Add, Pic, x10 y4 vImg, assets\bee.tif
+Gui, Add, Text, x303 y61 w167 cFFFFFF vSpeedGui, %txtSpeed% -
 Gui, Add, Text, x303 y29 w230 cFFFFFF vStatus, %txtStatus% %txtIdle%
-Gui, Add, Text, x303 y45 cFFFFFF vDatabase, %txtDb% %DbFileName%
-
+Gui, Add, Text, x303 y45 cFFFFFF vDatabase, %txtDb%%DbFileName%
 Gui, Add, ListBox, x10 y119 w283 h250 vGameList hwndGameList +HScroll
 ListBoxAdjustHSB("GameList")
-Gui, Add, Button, x303 y120 w157 h30 vButt1 gBump, %txtButt1%
-Gui, Add, Button, x303 y160 w157 h30 vButt2 gSettings, %txtButt2%
-Gui, Add, Button, x303 y200 w157 h30 vButt3 gUpload, %txtButt3%
+Gui, Add, Button, x303 y120 w127 h30 vButt1 gBump, %txtButt1%
+Gui, Add, Button, x303 y160 w127 h30 vButt2 gSettings, %txtButt2%
+Gui, Add, Button, x303 y200 w127 h30 vButt3 gUpload, %txtButt3%
 Gui, Add, Text, cFFFFFF x303 y240, %txtSearch%
-Gui, Add, Edit, x303 y260 w157 vSearch, 
-Gui, Add, Progress,x303 y327 w157 h30 vProgress cffda30, 0
+Gui, Add, Edit, x303 y260 w127 vSearch, 
+Gui, Add, Progress,x303 y327 w127 h30 vProgress cffda30, 0
 Gui, Color, 333e40
-Gui, Show, w470 h367, BeeShop
+Gui, Show, w440 h367, BeeShop
 if (AutoUpdateIni = 1) {
     Goto, CheckForUpdates
 }
@@ -179,7 +177,7 @@ if (GameList = "") {
             GameName := GameList . ".cia"
             GuiControl,, Progress,  0
             EnableGui()
-            GuiControl,, SpeedGui2, -
+            GuiControl,, SpeedGui,Speed: -
             Sleep, 100
             GuiControl,, Progress,  25
             break
@@ -322,11 +320,11 @@ if (InputIp == "") {
 
     IniRead, SavedDb, settings.ini, Settings, db
     IniRead, SavedLang, settings.ini, Settings, language
-    if (SavedLang != CurrentLang) {
+    if (SavedLang != CurrentLang and InputIp != "") {
        Goto, AskForRestart
     }
 
-    if (SavedDb != CurrentDb) {
+    if (SavedDb != CurrentDb and InputIp != "") {
         Goto, AskForRestart
     }
 return
@@ -334,9 +332,9 @@ return
 AskForRestart:
 MsgBox, 4, beeShop - %txtRestart%, %txtAskRestart%
 IfMsgBox, Yes
-Reload
+    Reload
 IfMsgBox, No
-return
+    return
 
 Enter::
 Send, {Enter}
