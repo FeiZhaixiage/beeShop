@@ -168,7 +168,7 @@ Gui, Submit, NoHide
 if (GameList = "") {
     MsgBox, 0, beeShop - Error, %txtNoGame%
 } else if (Ip != "") {
-    GuiControl, Text, Status, %txtDownloading%
+    GuiControl, Text, Status, %txtStatus% %txtDownloading%
     Loop, % games.MaxIndex()
     {
         game := games[A_Index]
