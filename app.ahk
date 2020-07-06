@@ -113,7 +113,7 @@ GUI
 
 Menu, tray, Icon , assets/icon.ico, 1, 1
 Gui, 1:New,,beeShop
-Gui, Add, Pic, x10 y4 vImg, assets\bee.tif
+Gui, Add, Pic, x10 y4 vImg, assets\bee.png
 Gui, Add, Text, x303 y61 w167 cFFFFFF vSpeedGui, %txtSpeed% -
 Gui, Add, Text, x303 y29 w230 cFFFFFF vStatus, %txtStatus% %txtIdle%
 Gui, Add, Text, x303 y45 cFFFFFF vDatabase, %txtDb%%DbFileName%
@@ -147,7 +147,7 @@ Loop, % games.MaxIndex()
     ; game[2] url
     GuiControl,, GameList, % game[1]
 }
-GuiControl,, Img, assets\bee2.tif
+GuiControl,, Img, assets\bee2.png
 
 if (AutoUpdateIni = 1) {
     Goto, CheckForUpdates
