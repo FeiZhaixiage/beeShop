@@ -319,7 +319,6 @@ if (InputIp == "") {
     if (!FileExist(DatabaseIni)) {
         IniWrite, %ChosenDb%, settings.ini, Settings, db
     }
-    IniWrite, %ChosenDb%, settings.ini, Settings, db
 
     IniRead, SavedDb, settings.ini, Settings, db
     IniRead, SavedLang, settings.ini, Settings, language
