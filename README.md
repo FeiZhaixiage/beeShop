@@ -16,9 +16,9 @@ beeShop should now start downloading the selected list entry's `.cia` file. Once
 Over on your 3DS, you should now see a prompt in FBI asking you if you want to install. Press `Yes`, and FBI will get the file and install it automatically.
 
 ## Credits:
-* manuGMG
+* manuGMG & TimmSkiller
 * Steveice10 ([servefiles.py](https://github.com/Steveice10/FBI/tree/master/servefiles))
-* DexterX12 & TimmSkiller
+* DexterX12
 
 **Translators:**
 * TimmSkiller (German Translation)
