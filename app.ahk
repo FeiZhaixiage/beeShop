@@ -12,99 +12,80 @@ Include Libs and Startup
 #Include libs\7Zip.ahk
 #Include libs\Update.ahk
 
-CurrentRelease := 1.2
-if(!FileExist("settings.ini")) {
-    FileAppend, [Settings]`nip=`nauto_update=0`nlanguage=1`ndb=, settings.ini
-}
-IniRead, Ip, settings.ini, Settings, ip
-IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
-IniRead, LanguageIni, settings.ini, Settings, language
-IniRead, DatabaseIni, settings.ini, Settings, db
-DbFilePath := StrSplit(DatabaseIni, "\")
-DbFileName := DbFilePath[DbFilePath.MaxIndex()]
-
 if(FileExist("update.exe")) {
     FileDelete, update.exe
 }
 
-lang := []
-if (LanguageIni = 1) {
-    Loop, Read, assets\langs\english.lang
-    lang.push(A_LoopReadLine)
-}
-else if (LanguageIni = 2) {
-    Loop, Read, assets\langs\spanish.lang
-    lang.push(A_LoopReadLine)
-}
-else if (LanguageIni = 3) {
-    Loop, Read, assets\langs\german.lang
-    lang.push(A_LoopReadLine)
-}
-else if (LanguageIni = 4) {
-    Loop, Read, assets\langs\italian.lang
-    lang.push(A_LoopReadLine)
-}
-else if (LanguageIni = 5) {
-    Loop, Read, assets\langs\french.lang
-    lang.push(A_LoopReadLine)
-}
-else if (LanguageIni = 6) {
-    Loop, Read, assets\langs\catalan.lang
-    lang.push(A_LoopReadLine)
-}
-else if (LanguageIni = 7) {
-    Loop, Read, assets\langs\brportuguese.lang
-    lang.push(A_LoopReadLine)
+if(!FileExist("settings.ini")) {
+    FileAppend, [Settings]`nip=`nauto_update=0`nlanguage=1`ndb=, settings.ini
 }
 
-txtDbMissing := lang[1]
-txtButt1  := lang[2]
-txtButt2  := lang[3]
-txtButt3  := lang[4]
-txtStatus := lang[5]
-txtDb := lang[6]
-txtSpeed := lang[7]
-txtSettings := lang[8]
-txtLanguage := lang[9]
-txtSave := lang[10]
-txtCfu := lang[11]
-txtUpdate := lang[12]
-txtAutoUpdate := lang[13]
-txtCfuMsg := lang[14]
-txtUpdateFound := lang[15]
-txtNoUpdateFound := lang[16] . CurrentRelease
-txtNoGame := lang[17]
-txtDownloading := lang[18]
-txtUploading := lang[19]
-txtIpNotConfigured := lang[20]
-txtSelectGame := lang[21]
-txtIdle := lang[22]
-txtRestart := lang[23]
-txtAskRestart := lang[24]
-txtFileSelect := lang[25]
-txtSelect := lang[26]
-txtClickText := lang[27]
-txtSearch := lang[28]
+CurrentRelease := 1.2
+
+;read settings ini
+IniRead, Ip, settings.ini, Settings, ip
+IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
+IniRead, LanguageIni, settings.ini, Settings, language
+IniRead, DatabaseIni, settings.ini, Settings, db
+
+;read configured language from ini
+IniRead, txtDbMissing, languages.ini, %LanguageIni%, txtDbMissing
+IniRead, txtBtnDownload, languages.ini, %LanguageIni%, txtBtnDownload
+IniRead, txtBtnSettings, languages.ini, %LanguageIni%, txtBtnSettings
+IniRead, txtBtnUpload, languages.ini, %LanguageIni%, txtBtnUpload
+IniRead, txtStatus, languages.ini, %LanguageIni%, txtStatus
+IniRead, txtDb, languages.ini, %LanguageIni%, txtDb
+IniRead, txtSpeed, languages.ini, %LanguageIni%, txtSpeed
+IniRead, txtSettings, languages.ini, %LanguageIni%, txtSettings
+IniRead, txtLanguage, languages.ini, %LanguageIni%, txtLanguage
+IniRead, txtSave, languages.ini, %LanguageIni%, txtSave
+IniRead, txtCfu, languages.ini, %LanguageIni%, txtCfu
+IniRead, txtUpdate, languages.ini, %LanguageIni%, txtUpdate
+IniRead, txtAutoUpdate, languages.ini, %LanguageIni%, txtAutoUpdate
+IniRead, txtCfuMsg, languages.ini, %LanguageIni%, txtCfuMsg
+IniRead, txtUpdateFound, languages.ini, %LanguageIni%, txtUpdateFound
+IniRead, txtNoUpdateFound, languages.ini, %LanguageIni%, txtNoUpdateFound
+IniRead, txtNoGame, languages.ini, %LanguageIni%, txtNoGame
+IniRead, txtDownloading, languages.ini, %LanguageIni%, txtDownloading
+IniRead, txtUploading, languages.ini, %LanguageIni%, txtUploading
+IniRead, txtIpNotConfigured, languages.ini, %LanguageIni%, txtIpNotConfigured
+IniRead, txtSelectGame, languages.ini, %LanguageIni%, txtSelectGame
+IniRead, txtIdle, languages.ini, %LanguageIni%, txtIdle
+IniRead, txtRestart, languages.ini, %LanguageIni%, txtRestart
+IniRead, txtAskRestart, languages.ini, %LanguageIni%, txtAskRestart
+IniRead, txtFileSelect, languages.ini, %LanguageIni%, txtFileSelect
+IniRead, txtSelect, languages.ini, %LanguageIni%, txtSelect
+IniRead, txtClickText, languages.ini, %LanguageIni%, txtClickText
+IniRead, txtSearch, languages.ini, %LanguageIni%, txtSearch
+IniRead, txtProgress, languages.ini, %LanguageIni%, txtProgress
+IniRead, txtBtnShowLink, languages.ini, %LanguageIni%, txtBtnShowLink
+IniRead, txtLink, languages.ini, %LanguageIni%, txtLink
+
+DbFilePath := StrSplit(DatabaseIni, "\")
+DbFileName := DbFilePath[DbFilePath.MaxIndex()]
+
 /*
 Functions
 */
 
 EnableGui() {
-    GuiControl, Enable, Butt1
-    GuiControl, Enable, Butt2
-    GuiControl, Enable, Butt3
-    GuiControl, Enable, Butt4
+    GuiControl, Enable, BtnDownload
+    GuiControl, Enable, BtnSettings
+    GuiControl, Enable, BtnUpload
+    GuiControl, Enable, BtnShowLink
     GuiControl, Enable, GameList
     GuiControl, Enable, Search
+    GuiControl, Enable, BtnBtnShowLink
 }
 
 DisableGui() {
-    GuiControl, Disable, Butt1
-    GuiControl, Disable, Butt2
-    GuiControl, Disable, Butt3
-    GuiControl, Disable, Butt4
+    GuiControl, Disable, BtnDownload
+    GuiControl, Disable, BtnSettings
+    GuiControl, Disable, BtnUpload
+    GuiControl, Disable, BtnShowLink
     GuiControl, Disable, GameList
     GuiControl, Disable, Search
+    GuiControl, Disable, BtnShowLink
 }
 
 /*
@@ -113,20 +94,36 @@ GUI
 
 Menu, tray, Icon , assets/icon.ico, 1, 1
 Gui, 1:New,,beeShop
-Gui, Add, Pic, x10 y4 vImg, assets\bee.png
-Gui, Add, Text, x303 y61 w167 cFFFFFF vSpeedGui, %txtSpeed% -
-Gui, Add, Text, x303 y29 w230 cFFFFFF vStatus, %txtStatus% %txtIdle%
-Gui, Add, Text, x303 y45 cFFFFFF vDatabase, %txtDb%%DbFileName%
-Gui, Add, ListBox, x10 y119 w283 h250 vGameList hwndGameList +HScroll
+Gui, Add, Pic, x10 y10 vImg, assets\bee.png
+
+; labels
+Gui, Font, s10
+Gui, Add, Text, x223 y39 w167 cFFFFFF vSpeedGui, %txtSpeed% N/A
+Gui, Add, Text, x223 y19 w230 cFFFFFF vStatus, %txtStatus% %txtIdle%
+Gui, Add, Text, x223 y58 cFFFFFF vDatabase, %txtDb% %DbFileName%
+;
+Gui, Font, s9
+
+Gui, Add, ListBox, x10 y119 w283 h290 vGameList hwndGameList +HScroll
 ListBoxAdjustHSB("GameList")
-Gui, Add, Button, x303 y120 w127 h30 vButt1 gBump, %txtButt1%
-Gui, Add, Button, x303 y160 w127 h30 vButt2 gSettings, %txtButt2%
-Gui, Add, Button, x303 y200 w127 h30 vButt3 gUpload, %txtButt3%
-Gui, Add, Text, cFFFFFF x303 y240, %txtSearch%
-Gui, Add, Edit, x303 y260 w127 vSearch, 
-Gui, Add, Progress,x303 y327 w127 h30 vProgress cffda30, 0
+
+; search
+Gui, Add, Text, cFFFFFF x303 y100, %txtSearch%
+Gui, Add, Edit, x303 y120 w127 vSearch
+
+; buttons
+Gui, Add, Button, x303 y151 w127 h30 vBtnDownload gDownload, %txtBtnDownload%
+Gui, Add, Button, x303 y191 w127 h30 vBtnUpload gUpload, %txtBtnUpload%
+Gui, Add, Button, x303 y231 w127 h30 vBtnShowLink gShowLink, %txtBtnShowLink%
+Gui, Add, Button, x303 y271 w127 h30 vBtnSettings gSettings, %txtBtnSettings%
+
+; progress bar
+Gui, Add, Text, cFFFFFF x303 y359, %txtProgress%
+Gui, Add, Progress, x303 y379 w127 h30 vProgress cffda30, 0
+
 Gui, Color, 333e40
-Gui, Show, w440 h367, BeeShop
+Gui, Show, w440 h419, BeeShop
+
 if (AutoUpdateIni = 1) {
     Goto, CheckForUpdates
 }
@@ -134,11 +131,12 @@ if (AutoUpdateIni = 1) {
 if (FileExist(DatabaseIni)) {
     FileRead, games, %DatabaseIni%
     Sort, games
+    games := StrSplit(games, "`n") 
 } else {
     GuiControl,, GameList, %txtDbMissing%
-    GuiControl, Disable, Butt1
+    GuiControl, Disable, BtnDownload
+    GuiControl, Disable, BtnShowLink
 }
-games := StrSplit(games, "`n") 
 
 Loop, % games.MaxIndex()
 {
@@ -147,6 +145,7 @@ Loop, % games.MaxIndex()
     ; game[2] url
     GuiControl,, GameList, % game[1]
 }
+
 GuiControl,, Img, assets\bee2.png
 
 if (AutoUpdateIni = 1) {
@@ -160,7 +159,7 @@ DisableGui()
 Goto, FTPUpload
 return
 
-Bump:
+Download:
 Gui, Submit, NoHide
 
 if (GameList = "") {
@@ -186,6 +185,30 @@ if (GameList = "") {
 Goto, FTPUpload
 } else {
     MsgBox, 0, beeShop - Error, %txtIpNotConfigured%
+}
+return
+
+ShowLink:
+Gui, Submit, NoHide
+
+if (GameList = "") {
+    MsgBox, 0, beeShop - Error, %txtNoGame%
+}
+else {
+    Loop, % games.MaxIndex()
+    {
+        game := games[A_Index]
+        game := StrSplit(game, ",") 
+
+        If (game[1] = GameList) {
+            stuff := game[2]
+            Gui, ShowLink:New,, %txtBtnShowLink%
+            Gui, Color, 333e40
+            Gui, Add, Text, x10 y10 cFFFFFF, %txtLink%
+            Gui, Add, Edit, x10 y30 w230 h60, %stuff%
+            Gui, Show, h100 w250,, %txtBtnShowLink%
+        }
+    }  
 }
 return
 
@@ -222,10 +245,9 @@ return
 
 
 ; Settings
-; Work In Progress
-
 
 Settings:
+
 ; Read settings from config
 IniRead, Ip, settings.ini, Settings, ip
 IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
@@ -280,7 +302,7 @@ CheckForUpdates:
     }
     
     if (LastRelease > CurrentRelease) {
-        MsgBox, 4, beeShop - %txtUpdate%, %txtUpdateFound%
+        MsgBox, 4, beeShop - %txtUpdate%, %txtCfuMsg%
         IfMsgBox, Yes
             LastReleaseURL := JsonResponse.assets[1].browser_download_url
             DownloadFile(LastReleaseURL, "release.zip", True, False)
@@ -296,7 +318,7 @@ CheckForUpdates:
             EnableGui()
             return
     } else {
-        MsgBox,0,beeShop - %txtUpdate%,%txtNoUpdateFound% 
+        MsgBox,0,beeShop - %txtUpdate%, %txtNoUpdateFound% %CurrentRelease%
     }
 return
 
@@ -314,12 +336,14 @@ if (InputIp == "") {
 }
     IniWrite, %AutoUpdate%, settings.ini, Settings, auto_update
     IniWrite, %Language%, settings.ini, Settings, language
+
     if (!FileExist(DatabaseIni)) {
         IniWrite, %ChosenDb%, settings.ini, Settings, db
     }
 
     IniRead, SavedDb, settings.ini, Settings, db
     IniRead, SavedLang, settings.ini, Settings, language
+
     if (SavedLang != CurrentLang and InputIp != "") {
        Goto, AskForRestart
     }
@@ -333,8 +357,7 @@ AskForRestart:
 MsgBox, 4, beeShop - %txtRestart%, %txtAskRestart%
 IfMsgBox, Yes
     Reload
-IfMsgBox, No
-    return
+return
 
 Enter::
 Send, {Enter}
