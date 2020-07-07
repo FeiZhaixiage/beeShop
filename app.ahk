@@ -395,5 +395,6 @@ Gui,1:Submit,NoHide
 GuiControl, ChooseString, GameList, %Search%
 return
 
-GuiClose:
+MainGuiClose:
 ExitApp
+return
