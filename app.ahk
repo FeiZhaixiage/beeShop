@@ -17,7 +17,7 @@ if(FileExist("update.exe")) {
 }
 
 if(!FileExist("settings.ini")) {
-    FileAppend, [Settings]`nip=`nauto_update=0`nlanguage=1`ndb=, settings.ini
+    FileAppend, [Settings]`nip=`nauto_update=0`nlanguage=1`ndb=`nul_method=1, settings.ini
 }
 
 CurrentRelease := 1.2
@@ -28,6 +28,10 @@ IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
 IniRead, LanguageIni, settings.ini, Settings, language
 IniRead, DatabaseIni, settings.ini, Settings, db
 IniRead, UploadMethodIni, settings.ini, Settings, ul_method
+
+if (UploadMethodIni = 1) {
+    GuiControl, Disable, BtnDownload
+}
 
 ;read configured language from ini
 IniRead, txtDbMissing, languages.ini, %LanguageIni%, txtDbMissing
@@ -91,14 +95,6 @@ DisableGui() {
     GuiControl, Disable, Search
     GuiControl, Disable, BtnShowLink
 }
-
-DisableDownload() {
-    GuiControl, Disable, BtnDownload
-}
-
-EnableDownload() {
-    GuiControl, Enable, BtnDownload
-}
 /*
 GUI
 */
@@ -123,7 +119,7 @@ Gui, Add, Text, cFFFFFF x303 y100, %txtSearch%
 Gui, Add, Edit, x303 y120 w127 vSearch
 
 ; buttons
-Gui, Add, Button, x303 y151 w127 h30 vBtnDownload HwndBtnDownload gDownload, %txtBtnDownload%
+Gui, Add, Button, x303 y151 w127 h30 vBtnDownload gDownload, %txtBtnDownload%
 Gui, Add, Button, x303 y191 w127 h30 vBtnUpload gUpload, %txtBtnUpload%
 Gui, Add, Button, x303 y231 w127 h30 vBtnShowLink gShowLink, %txtBtnShowLink%
 Gui, Add, Button, x303 y271 w127 h30 vBtnSettings gSettings, %txtBtnSettings%
@@ -367,20 +363,15 @@ IniRead, UploadMethodIni, settings.ini, Settings, ul_method
 
 if (SavedLang != CurrentLang and InputIp != "") {
    Goto, AskForRestart
-}
-
-if (SavedDb != CurrentDb and InputIp != "") {
+} else if (SavedDb != CurrentDb and InputIp != "") {
     Goto, AskForRestart
 }
 
-if (UploadMethodIni != 1) {
-    msgbox % %UploadMethodIni%
-    EnableDownload()
+if (PreferredUlMethod = 1) {
+    GuiControl, Main:Disable, BtnDownload
+} else {
+    GuiControl, Main:Enable, BtnDownload
 }
-else {
-    DisableDownload()
-}
-
 return
 
 AskForRestart:
