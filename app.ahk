@@ -31,6 +31,7 @@ IniRead, UploadMethodIni, settings.ini, Settings, ul_method
 
 if (UploadMethodIni = 1) {
     GuiControl, Disable, BtnDownload
+    GuiControl, Disable, BtnShowLink
 }
 
 ;read configured language from ini
@@ -71,6 +72,9 @@ IniRead, txtDownloadOnPC, languages.ini, %LanguageIni%, txtDownloadOnPC
 
 DbFilePath := StrSplit(DatabaseIni, "\")
 DbFileName := DbFilePath[DbFilePath.MaxIndex()]
+if (StrLen(DbFileName) > 11) {
+    DbFileName := SubStr(DbFileName, 1, 9) . "..."
+}
 
 /*
 Functions
@@ -104,10 +108,9 @@ Gui, Main:New,,beeShop
 Gui, Add, Pic, x10 y10 vImg, assets\bee.png
 
 ; labels
-Gui, Font, s10
-Gui, Add, Text, x223 y39 w167 cFFFFFF vSpeedGui, %txtSpeed% N/A
-Gui, Add, Text, x223 y19 w230 cFFFFFF vStatus, %txtStatus% %txtIdle%
-Gui, Add, Text, x223 y58 cFFFFFF vDatabase, %txtDb% %DbFileName%
+Gui, Add, Text, x303 y18 w167 cFFFFFF vSpeedGui, %txtSpeed% N/A
+Gui, Add, Text, w230 cFFFFFF vStatus, %txtStatus% %txtIdle%
+Gui, Add, Text, cFFFFFF w230 vDatabase, %txtDb% %DbFileName%
 ;
 Gui, Font, s9
 
@@ -158,10 +161,6 @@ GuiControl,, Img, assets\bee2.png
 
 if (AutoUpdateIni = 1) {
     Goto, CheckForUpdates
-}
-
-if (UploadMethodIni = 1) {
-    GuiControl, Disable, BtnDownload
 }
 return
 
@@ -267,7 +266,7 @@ IniRead, UploadMethodIni, settings.ini, Settings, ul_method
 
 Gui, Settings:New,,Settings
 Menu, tray, Icon, assets/icon.ico, 1, 1
-Gui, Add, Text, x10 y12 cFFFFFF gDbName, %txtDb% %DbFileName%
+Gui, Add, Text, x10 y12 cFFFFFF gDbName vDbName, %txtDb% %DbFileName%
 Gui, Add, Text, x10 y34 w230 cFFFFFF, %txtClickText%
 Gui, Add, Button, gSelectDb x170 y8 w70 h22, %txtSelect%
 ; IP Config
@@ -295,6 +294,12 @@ return
 
 SelectDb:
 FileSelectFile, ChosenDb, 1, %A_WorkingDir%, beeShop - %txtFileSelect%, (*.csv)
+ChosenDb := StrSplit(ChosenDb, "\")
+ChosenDb := ChosenDb[ChosenDb.MaxIndex()]
+if (StrLen(ChosenDb) > 11) {
+    ChosenDb := SubStr(ChosenDb, 1, 9) . "..."
+}
+GuiControl, Text, DbName, %txtDb% %ChosenDb%
 return
 
 CheckForUpdates:
@@ -352,10 +357,7 @@ if (InputIp == "") {
 IniWrite, %AutoUpdate%, settings.ini, Settings, auto_update
 IniWrite, %Language%, settings.ini, Settings, language
 IniWrite, %PreferredUlMethod%, settings.ini, Settings, ul_method
-
-if (!FileExist(DatabaseIni)) {
-    IniWrite, %ChosenDb%, settings.ini, Settings, db
-}
+IniWrite, %ChosenDb%, settings.ini, Settings, db
 
 IniRead, SavedDb, settings.ini, Settings, db
 IniRead, SavedLang, settings.ini, Settings, language
@@ -369,8 +371,10 @@ if (SavedLang != CurrentLang and InputIp != "") {
 
 if (PreferredUlMethod = 1) {
     GuiControl, Main:Disable, BtnDownload
+    GuiControl, Main:Disable, BtnShowLink
 } else {
     GuiControl, Main:Enable, BtnDownload
+    GuiControl, Main:Enable, BtnShowLink
 }
 return
 
