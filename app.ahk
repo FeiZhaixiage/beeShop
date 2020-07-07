@@ -294,12 +294,12 @@ return
 
 SelectDb:
 FileSelectFile, ChosenDb, 1, %A_WorkingDir%, beeShop - %txtFileSelect%, (*.csv)
-ChosenDb := StrSplit(ChosenDb, "\")
-ChosenDb := ChosenDb[ChosenDb.MaxIndex()]
-if (StrLen(ChosenDb) > 11) {
-    ChosenDb := SubStr(ChosenDb, 1, 9) . "..."
+DbFileName := StrSplit(ChosenDb, "\")
+DbFileName := DbFileName[DbFileName.MaxIndex()]
+if (StrLen(DbFileName) > 11) {
+    DbFileName := SubStr(DbFileName, 1, 9) . "..."
 }
-GuiControl, Text, DbName, %txtDb% %ChosenDb%
+GuiControl, Text, DbName, %txtDb% %DbFileName%
 return
 
 CheckForUpdates:
