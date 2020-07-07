@@ -27,6 +27,7 @@ IniRead, Ip, settings.ini, Settings, ip
 IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
 IniRead, LanguageIni, settings.ini, Settings, language
 IniRead, DatabaseIni, settings.ini, Settings, db
+IniRead, UploadMethodIni, settings.ini, Settings, ul_method
 
 ;read configured language from ini
 IniRead, txtDbMissing, languages.ini, %LanguageIni%, txtDbMissing
@@ -60,6 +61,9 @@ IniRead, txtSearch, languages.ini, %LanguageIni%, txtSearch
 IniRead, txtProgress, languages.ini, %LanguageIni%, txtProgress
 IniRead, txtBtnShowLink, languages.ini, %LanguageIni%, txtBtnShowLink
 IniRead, txtLink, languages.ini, %LanguageIni%, txtLink
+IniRead, txtPreferredUlMethod, languages.ini, %LanguageIni%, txtPreferredUlMethod
+IniRead, txtDownloadOn3DS, languages.ini, %LanguageIni%, txtDownloadOn3DS
+IniRead, txtDownloadOnPC, languages.ini, %LanguageIni%, txtDownloadOnPC
 
 DbFilePath := StrSplit(DatabaseIni, "\")
 DbFileName := DbFilePath[DbFilePath.MaxIndex()]
@@ -88,12 +92,19 @@ DisableGui() {
     GuiControl, Disable, BtnShowLink
 }
 
+DisableDownload() {
+    GuiControl, Disable, BtnDownload
+}
+
+EnableDownload() {
+    GuiControl, Enable, BtnDownload
+}
 /*
 GUI
 */
 
 Menu, tray, Icon , assets/icon.ico, 1, 1
-Gui, 1:New,,beeShop
+Gui, Main:New,,beeShop
 Gui, Add, Pic, x10 y10 vImg, assets\bee.png
 
 ; labels
@@ -112,7 +123,7 @@ Gui, Add, Text, cFFFFFF x303 y100, %txtSearch%
 Gui, Add, Edit, x303 y120 w127 vSearch
 
 ; buttons
-Gui, Add, Button, x303 y151 w127 h30 vBtnDownload gDownload, %txtBtnDownload%
+Gui, Add, Button, x303 y151 w127 h30 vBtnDownload HwndBtnDownload gDownload, %txtBtnDownload%
 Gui, Add, Button, x303 y191 w127 h30 vBtnUpload gUpload, %txtBtnUpload%
 Gui, Add, Button, x303 y231 w127 h30 vBtnShowLink gShowLink, %txtBtnShowLink%
 Gui, Add, Button, x303 y271 w127 h30 vBtnSettings gSettings, %txtBtnSettings%
@@ -123,6 +134,7 @@ Gui, Add, Progress, x303 y379 w127 h30 vProgress cffda30, 0
 
 Gui, Color, 333e40
 Gui, Show, w440 h419, BeeShop
+
 
 if (AutoUpdateIni = 1) {
     Goto, CheckForUpdates
@@ -152,6 +164,9 @@ if (AutoUpdateIni = 1) {
     Goto, CheckForUpdates
 }
 
+if (UploadMethodIni = 1) {
+    GuiControl, Disable, BtnDownload
+}
 return
 
 Upload:
@@ -252,6 +267,7 @@ Settings:
 IniRead, Ip, settings.ini, Settings, ip
 IniRead, AutoUpdateIni, settings.ini, Settings, auto_update
 IniRead, LanguageIni, settings.ini, Settings, language
+IniRead, UploadMethodIni, settings.ini, Settings, ul_method
 
 Gui, Settings:New,,Settings
 Menu, tray, Icon, assets/icon.ico, 1, 1
@@ -264,12 +280,15 @@ Gui, Add, Edit, vInputIp x90 y62 w100, %Ip%
 ; Language Config
 Gui, Add, Text, cFFFFFF x10 y100 w70, %txtLanguage%
 Gui, Add, DropDownList, x90 y95 w80 vLanguage Choose%LanguageIni% AltSubmit, English|Spanish|German|Italian|French|Catalan|Portuguese
+; Preferred Upload Method
+Gui, Add, Text, cFFFFFF x10 y135, %txtPreferredUlMethod%
+Gui, Add, DropDownList, x10 y155 w230 vPreferredUlMethod Choose%UploadMethodIni% AltSubmit, %txtDownloadOn3DS%|%txtDownloadOnPC%
 ; Automatic Update Config
-Gui, Add, CheckBox, vAutoUpdate x10 y137 cFFFFFF Checked%AutoUpdateIni%, %txtAutoUpdate%
-Gui, Add, Text, x10 y182 vText c3DCEFC gCheckForUpdates, %txtCfu%
+Gui, Add, Text, x10 y222 vText c3DCEFC gCheckForUpdates, %txtCfu%
+Gui, Add, CheckBox, vAutoUpdate x10 y187 cFFFFFF Checked%AutoUpdateIni%, %txtAutoUpdate%
 ; Save settings button
-Gui, Add, Button, x160 y177 w80 gSave, %txtSave% 
-Gui, Show, h210 w250,, %txtSettings%
+Gui, Add, Button, x160 y217 w80 gSave, %txtSave% 
+Gui, Show, h250 w250,, %txtSettings%
 OnMessage(0x200, "Help")
 Gui, Color, 333e40
 return
@@ -301,7 +320,7 @@ CheckForUpdates:
         return
     }
     
-    if (LastRelease > CurrentRelease) {
+    if (LastRelease =! CurrentRelease) {
         MsgBox, 4, beeShop - %txtUpdate%, %txtCfuMsg%
         IfMsgBox, Yes
             LastReleaseURL := JsonResponse.assets[1].browser_download_url
@@ -334,23 +353,34 @@ if (InputIp == "") {
 } else if (InputIp != Ip) {
     IniWrite, %InputIp%, settings.ini, Settings, ip
 }
-    IniWrite, %AutoUpdate%, settings.ini, Settings, auto_update
-    IniWrite, %Language%, settings.ini, Settings, language
+IniWrite, %AutoUpdate%, settings.ini, Settings, auto_update
+IniWrite, %Language%, settings.ini, Settings, language
+IniWrite, %PreferredUlMethod%, settings.ini, Settings, ul_method
 
-    if (!FileExist(DatabaseIni)) {
-        IniWrite, %ChosenDb%, settings.ini, Settings, db
-    }
+if (!FileExist(DatabaseIni)) {
+    IniWrite, %ChosenDb%, settings.ini, Settings, db
+}
 
-    IniRead, SavedDb, settings.ini, Settings, db
-    IniRead, SavedLang, settings.ini, Settings, language
+IniRead, SavedDb, settings.ini, Settings, db
+IniRead, SavedLang, settings.ini, Settings, language
+IniRead, UploadMethodIni, settings.ini, Settings, ul_method
 
-    if (SavedLang != CurrentLang and InputIp != "") {
-       Goto, AskForRestart
-    }
+if (SavedLang != CurrentLang and InputIp != "") {
+   Goto, AskForRestart
+}
 
-    if (SavedDb != CurrentDb and InputIp != "") {
-        Goto, AskForRestart
-    }
+if (SavedDb != CurrentDb and InputIp != "") {
+    Goto, AskForRestart
+}
+
+if (UploadMethodIni != 1) {
+    msgbox % %UploadMethodIni%
+    EnableDownload()
+}
+else {
+    DisableDownload()
+}
+
 return
 
 AskForRestart:
