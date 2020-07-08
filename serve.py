@@ -30,12 +30,10 @@ hostPort = 8080  # Default
 
 print(mode == 1)
 if (mode == 1):
-    print('hello')
     baseUrl = hostIp + ':' + str(hostPort) + '/'
     if os.path.isfile(iinput):
             file_list_payload = baseUrl + quote(os.path.basename(iinput))
             directory = os.path.dirname(iinput)  # get file directory
-            print('helo')
     else:
         directory = iinput  # it's a directory
         file_list_payload = ''  # init the payload before adding lines
@@ -43,7 +41,6 @@ if (mode == 1):
             file_list_payload += baseUrl + quote(file) + '\n'
 
             if len(file_list_payload) == 0:
-                print('asa')
                 sys.exit(1)
 
     file_list_payloadBytes = file_list_payload.encode('ascii')
@@ -69,18 +66,17 @@ if (mode == 1):
             time.sleep(0.05)
             sock.close()
     except Exception as e:
-        print('asdf3')
         server.shutdown()
         sys.exit(1)
-        server.shutdown()
-elif (mode == 2):
+    server.shutdown()
+
+else:
     try:
         from urlparse import urlparse
     except ImportError:
         from urllib.parse import urlparse
 
     if len(sys.argv) < 3:
-        print('asdf5')
         sys.exit(1)
 
     target_ip = sys.argv[2]
@@ -89,7 +85,6 @@ elif (mode == 2):
     for url in sys.argv[3:]:
         parsed = urlparse(url)
         if not parsed.scheme in ('http', 'https') or parsed.netloc == '':
-            print('asdf2')
             sys.exit(1)
 
     file_list_payload += url + '\n'
@@ -104,5 +99,4 @@ elif (mode == 2):
             time.sleep(0.05)
             sock.close()
     except Exception as e:
-        print('asdf9')
         sys.exit(1)
