@@ -1,4 +1,3 @@
-# beeShop
 ![beeShop](https://i.imgur.com/PsHvYYR.png)
 
 ## How to use:
