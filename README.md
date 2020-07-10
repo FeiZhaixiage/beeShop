@@ -1,4 +1,4 @@
-![beeShop](https://i.imgur.com/PsHvYYR.png)
+![beeShop](https://i.imgur.com/ZWQt80t.png)
 
 ## How to use:
 
