@@ -1,5 +1,4 @@
-# beeShop
-AutoHotkey Script that downloads CIAs from a database, and sends them over to a 3DS to be installed using Steveice10's servefiles feature.
+![beeShop](https://i.imgur.com/ZWQt80t.png)
 
 ## How to use:
 
