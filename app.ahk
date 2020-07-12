@@ -702,7 +702,7 @@ if (LastRelease = "") {
     return
 }
     
-if (LastRelease =! CurrentRelease) 
+if (LastRelease != CurrentRelease) 
 {
     MsgBox, 4, beeShop - %txtUpdate%, %txtCfuMsg%
     IfMsgBox, Yes
