@@ -46,8 +46,9 @@ Click on save.
 
 2. Get CIAs (app files). These must be sourced by yourself or by using the first install method.
 3. Make sure you have your SD card inserted into your computer. (and that you have the correct drive letter specified in the custom-install settings).
-4. On the main window, click on `Install`, which will open a file selection dialog. Select a .CIA file. (If you have checked `Show custom-install command line window`, that window will open so you can see what's happening.)
+4. On the main window, click on `Install`, which will open a file selection dialog. Select a .CIA file. If you have checked `Show custom-install command line window`, that window will open so you can see what's happening.
 5. Once it finished installing, you have to use [custom-install-finalize](https://github.com/ihaveamac/custom-install/releases/tag/finalize-1.4) on your 3DS to install a ticket for the installed title.
+
 ## Credits:
 * manuGMG & TimmSkiller
 * DexterX12
