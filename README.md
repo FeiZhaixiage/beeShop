@@ -54,8 +54,8 @@ Click on save.
 * DexterX12
 
 **Tools used:**
-* Steveice10 - [servefiles.py and sendurls.py](https://github.com/Steveice10/FBI/tree/master/servefiles))
-* ihaveamac - [custom-install](https://github.com/ihaveamac/custom-install)
+* Steveice10 - ([servefiles.py and sendurls.py](https://github.com/Steveice10/FBI/tree/master/servefiles))
+* ihaveamac - ([custom-install](https://github.com/ihaveamac/custom-install))
 
 **Translators:**
 * TimmSkiller (German Translation)
