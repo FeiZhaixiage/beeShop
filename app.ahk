@@ -568,7 +568,11 @@ return
 SelectMovable:
 FileSelectFile, MovablePath, 1,, beeShop, Movable.sed (*.sed)
 SplitPath, MovablePath, MovableName,, MvbleExtension,,
-if (MvbleExtension != "sed") {
+if (MovablePath = "") 
+{
+    return
+}
+else if (MvbleExtension != "sed") {
     MsgBox, 0, beeShop, %txtMovableInvalid%
 }
 else {
@@ -579,7 +583,11 @@ return
 SelectBoot9:
 FileSelectFile, Boot9Path, 1,, beeShop, boot9.bin (*.bin)
 SplitPath, Boot9Path, Boot9Name,, Boot9Extension,,
-if (Boot9Extension != "bin") {
+if (Boot9Path = "") 
+{
+    return
+}
+else if (Boot9Extension != "bin") {
     MsgBox, 0, beeShop, %txtB9Invalid%
 }
 else {
@@ -590,10 +598,15 @@ return
 SelectSeedDb:
 FileSelectFile, SeedDbPath, 1,, beeShop, seeddb.bin (*.bin)
 SplitPath, SeedDbPath, SeedDbName,, SeedDbExtension,,
-if (SeedDbExtension != "bin") {
+if (SeedDbPath = "") 
+{
+    return
+}
+else if (SeedDbExtension != "bin") {
     MsgBox, 0, beeShop, %txtSdbInvalid%
 }
-else {
+else 
+{
     GuiControl, 3:Text, LabelSeedDbName, SeedDB: %SeedDbName%
 }
 return
@@ -672,7 +685,11 @@ return
 SelectDb:
 FileSelectFile, ChosenDb, 1, %A_WorkingDir%, beeShop - %txtFileSelect%, Database CSV (*.csv)
 SplitPath, ChosenDb, DbFileName,, DbExtension,,
-if (DbExtension != "csv") {
+if (ChosenDb = "") 
+{
+    return
+}
+else if (DbExtension != "csv") {
     Msgbox, 0, beeShop, %txtInvalidDb%
 }
 if (ChosenDb != "") {
