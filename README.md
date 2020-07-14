@@ -62,7 +62,7 @@ Click on save.
 * CiN CiN (Italian Translation)
 * raccoon (French Translation)
 * Eidwood (Catalan Translation)
-* GrabsZel (Portuguese Translation
+* GrabsZel (Portuguese Translation)
 
 **Testers:**
 * Mineplanet84
