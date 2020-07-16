@@ -32,7 +32,7 @@ WARNING: custom-install is intended for advanced users only. Damage and or corru
 
 1. Open the settings menu and click on the `Configure custom-install` button. This will open yet another window where you can specify the different files/paths needed for custom-install. Here's what you need:
 
-- The DSiWare encryption key from your 3DS (movable.sed)
+- The SD card content encryption key from your 3DS (movable.sed)
 - The ARM9 Bootrom of your 3DS (boot9.bin)
 [How to dump various 3DS files](https://ianburgwin.net/ctr/dump/)
 - A seed database for games that require seeds to function (seeddb.bin) (required, beeShop won't launch custom-install without this)
