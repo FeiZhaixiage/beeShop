@@ -1,4 +1,6 @@
-![beeShop](https://i.imgur.com/ZWQt80t.png)
+<p align="center">
+  <img src="https://github.com/manuGMG/beeShop/blob/master/beeshop-logo.png?raw=true">
+</p>
 
 ## How to use:
 
