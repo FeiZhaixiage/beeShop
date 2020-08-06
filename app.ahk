@@ -152,7 +152,7 @@ DisableGui() {
 
 DisableGuiNoDb(text)
 {
-    GuiControl,, GameList, %text%
+    GuiControl,, GameList, |%text%
     GuiControl, 1:Disable, BtnDownload
     GuiControl, 1:Disable, BtnShowLink
     GuiControl, 1:Disable, Search
