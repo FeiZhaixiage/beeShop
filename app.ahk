@@ -512,7 +512,7 @@ Gui, Add, Text, x10 y65 cFFFFFF, IP:
 Gui, Add, Edit, vInputIp x75 y62 w100, %Ip%
 ; Language Config
 Gui, Add, Text, cFFFFFF x10 y100 w70, %txtLanguage%
-Gui, Add, DropDownList, x75 y95 w100 vLanguage Choose%LanguageIni% AltSubmit, English|Spanish|German|Italian|French|Catalan|Portuguese
+Gui, Add, DropDownList, x75 y95 w100 vLanguage Choose%LanguageIni% AltSubmit, English|Spanish|German|Italian|French|Catalan|Portuguese|Simplified Chinese|Traditional Chinese
 ; Preferred Install Method
 Gui, Add, Text, cFFFFFF x10 y135, %txtSelInstallMethod%
 Gui, Add, DropDownList, x10 y155 w230 vSelInstallMethod Choose%InstallMethodIni% AltSubmit, %txtDownloadOn3DS%|%txtDownloadOnPC%|custom-install
