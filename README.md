@@ -65,6 +65,7 @@ Click on save.
 * raccoon (French Translation)
 * Eidwood (Catalan Translation)
 * GrabsZel (Portuguese Translation)
+* zpxrainbowdash (Simplified & Traditional Chinese)
 
 **Testers:**
 * Mineplanet84
