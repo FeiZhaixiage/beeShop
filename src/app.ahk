@@ -59,20 +59,16 @@ EnableGui() {
     GuiControl, 1:Enable, Search
 
     IniRead, InstallMethodIni, settings.ini, Settings, install_method
-    if (SelInstallMethod = 1) 
+    switch InstallMethodIni
     {
-        GuiControl, 1:Disable, BtnDownload
-        GuiControl, 1:Disable, BtnShowLink
-    } 
-    else if (SelInstallMethod = 2) 
-    {
+    case 2: 
         GuiControl, 1:Enable, BtnDownload
         GuiControl, 1:Enable, BtnShowLink
-    }
-    else 
-    {
+        return
+    default:
         GuiControl, 1:Disable, BtnDownload
         GuiControl, 1:Disable, BtnShowLink
+        return
     }
 }
 
