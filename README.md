@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/manuGMG/beeShop/blob/master/beeshop-logo.png?raw=true">
+  <img src="https://github.com/manuGMG/beeShop/blob/master/logo.png?raw=true">
 </p>
 
 ## How to use:
@@ -52,27 +52,7 @@ Click on save.
 5. Once it finished installing, you have to use [custom-install-finalize](https://github.com/ihaveamac/custom-install/releases/tag/finalize-1.4) on your 3DS to install a ticket for the installed title.
 
 ## Credits:
-* manuGMG & TimmSkiller
-* DexterX12
-
-**Tools used:**
-* Steveice10 - ([servefiles.py and sendurls.py](https://github.com/Steveice10/FBI/tree/master/servefiles))
-* ihaveamac - ([custom-install](https://github.com/ihaveamac/custom-install))
-
-**Translators:**
-* TimmSkiller (German Translation)
-* CiN CiN (Italian Translation)
-* raccoon (French Translation)
-* Eidwood (Catalan Translation)
-* GrabsZel (Portuguese Translation)
-* zpxrainbowdash (Simplified & Traditional Chinese)
-
-**Testers:**
-* Mineplanet84
-* MyPasswordIsWeak
-* Mike
-* Kaiju
-* Kelonio
+Refer to CREDITS.MD
 
 ## Note:
 beeShop does not encourage piracy and is only a way of gathering homebrew applications to a modded Nintendo 3DS System.
