@@ -46,6 +46,7 @@ IniRead, txtLink, languages.ini, %LanguageIni%, txtLink
 IniRead, txtSelInstallMethod, languages.ini, %LanguageIni%, txtSelInstallMethod
 IniRead, txtDownloadOn3DS, languages.ini, %LanguageIni%, txtDownloadOn3DS
 IniRead, txtDownloadOnPC, languages.ini, %LanguageIni%, txtDownloadOnPC
+IniRead, txtCustominstall, languages.ini, %LanguageIni%, txtCustominstall
 IniRead, txtConfigCustomInstall, languages.ini, %LanguageIni%, txtConfigCustomInstall
 IniRead, txtFileNotSpecified, languages.ini, %LanguageIni%, txtFileNotSpecified
 IniRead, txtInstall, languages.ini, %LanguageIni%, txtInstall
