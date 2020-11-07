@@ -11,7 +11,7 @@
 * raccoon (French Translation)
 * Eidwood (Catalan Translation)
 * GrabsZel (Portuguese Translation)
-* zpxrainbowdash (Simplified & Traditional Chinese)
+* 肥宅虾哥 (Simplified & Traditional Chinese)
 
 **Testers:**
 * Mineplanet84
